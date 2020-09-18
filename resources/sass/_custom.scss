@@ -1,81 +1,185 @@
 @import "variables";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+ 
+.events-wrapper {
+    
+    @media (min-width: 768px) {
+        margin-top: 20px;
+    }
+    .events-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
 
-.events-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    .event-card {
-        max-width: 200px;
-        padding: 10px;
-        margin: 20px;
-        text-align: left;
-        align-items: center;
-        overflow: hidden;
-
-        .image-wrapper {
-            //width: 100%;
-            margin: 0 -10px 10px -10px;
-            height: 130px;
-            overflow: hidden;
-            position: relative;
-
-            img {
-                width: 100%;
-                position: absolute;
-                top: -100%;
-                left: 0;
-                right: 0;
-                bottom: -100%;
-                margin: auto;
-                width: 100%;
-            }
-        }
-
-        .event-type {
-            text-transform: uppercase;
-            font-weight: 600;
-            color: $orange;
-        }
-
-        .hr-text {
-            line-height: 1em;
-            text-transform: uppercase;
-            font-weight: 600;
-            position: relative;
-            outline: 0;
-            border: 0;
+        .event-card {
+            width: 200px;
+            padding: 10px;
+            margin: 20px;
             text-align: left;
-            height: 1.5em;
-            margin-right: -10px;
-            &:before {
-                content: "";
-                // use the linear-gradient for the fading effect
-                // use a solid background color for a solid bar
-                background: #c8c5af;
-                position: absolute;
-                left: 0;
-                top: 50%;
-                width: 100%;
-                height: 1px;
-            }
-            &:after {
-                content: attr(data-content);
-                position: relative;
-                display: inline-block;
-                color: orange;
-                padding: 0 1em 0 0;
-                line-height: 1.5em;
-                background-color: #fcfcfa;
-            }
-        }
+            align-items: center;
+            overflow: hidden;
 
-        h3 {
-            font-size: 12pt;
+            .image-wrapper {
+                //width: 100%;
+                margin: 0 -10px 10px -10px;
+                height: 130px;
+                overflow: hidden;
+                position: relative;
+
+                img {
+                    width: 100%;
+                    position: absolute;
+                    top: -100%;
+                    left: 0;
+                    right: 0;
+                    bottom: -100%;
+                    margin: auto;
+                    width: 100%;
+                }
+            }
+
+            .event-type {
+                text-transform: uppercase;
+                font-weight: 600;
+                color: $orange;
+            }
+
+            .hr-text {
+                line-height: 1em;
+                text-transform: uppercase;
+                font-weight: 600;
+                position: relative;
+                outline: 0;
+                border: 0;
+                text-align: left;
+                height: 1.5em;
+                margin-right: -10px;
+                &:before {
+                    content: "";
+                    // use the linear-gradient for the fading effect
+                    // use a solid background color for a solid bar
+                    background: #c8c5af;
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    width: 100%;
+                    height: 1px;
+                }
+                &:after {
+                    content: attr(data-content);
+                    position: relative;
+                    display: inline-block;
+                    color: orange;
+                    padding: 0 1em 0 0;
+                    line-height: 1.5em;
+                    background-color: #fcfcfa;
+                }
+            }
+
+            h3 {
+                font-size: 12pt;
+            }
         }
     }
-}
 
-.events-filter {
-    background-color: lightgray;
+    .events-filter {
+        background-color: #f1f1f1;
+        padding: 20px;
+
+        @media (min-width: 768px) {
+            max-height: 470px;
+        }
+
+        .btn-filter {
+            float: right;
+
+            @media (min-width: 768px) {
+                display: none;
+            }
+        }
+        .event-categories-form {
+            padding-top: 40px;
+
+            @media (min-width: 768px) {
+                display: block;
+            }
+
+            .date-input {
+                width: 90%;
+
+                .daterange {
+                    /* margin-top: 10px;
+                    border: 1px solid $gray;
+                    border-radius: 4px;
+                    padding: 5px 15px; */
+                    border-right: none;
+                } 
+
+                .fa-calendar-alt {
+                    color: $green;
+                }
+
+                .btn-outline-secondary {
+                    background-color: #fff;
+                    border: 1px solid #ced4da;
+                    border-left: none;
+                }
+
+            }
+
+            .checkbox-container {
+                display: flex;
+                margin-bottom: 10px;
+
+                input[type="checkbox"] {
+                    position: relative;
+                    width: 1.5em;
+                    height: 1.5em;
+                    color: $black;
+                    background-color: $white;
+                    border: 1px solid $gray;
+                    border-radius: 4px;
+                    appearance: none;
+                    outline: 0;
+                    cursor: pointer;
+                    transition: background 175ms cubic-bezier(0.1, 0.1, 0.25, 1);
+                    &::before {
+                        position: absolute;
+                        content: "";
+                        display: block;
+                        top: 1px;
+                        left: 6px;
+                        width: 8px;
+                        height: 14px;
+                        border-style: solid;
+                        border-color: $white;
+                        border-width: 0 3px 3px 0;
+                        transform: rotate(45deg);
+                        opacity: 0;
+                    }
+                    &:checked {
+                        color: $white;
+                        border-color: $green;
+                        background: $green;
+                        &::before {
+                            opacity: 1;
+                        }
+                        ~ label::before {
+                            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                        }
+                    }
+                }
+
+                label {
+                    position: relative;
+                    cursor: pointer;
+                    /* font-size: 1.5em;
+                    font-weight: 600; */
+                    padding: 0 0.8em 0;
+                    user-select: none;
+                }
+            }
+        }
+    }
 }

@@ -4,34 +4,46 @@
 
 .events-wrapper {
     margin-bottom: 40px;
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
         margin-top: 20px;
     }
 
-    
     .events-grid {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        padding-top: 10px;
+
+        @media (min-width: 992px) {
+            padding-top: 0px;
+        }
 
         .event-card {
-            width: 200px;
+            width: 100%;
             padding: 10px;
             text-align: left;
             align-items: center;
             overflow: hidden;
-            //border-bottom: 1px solid $green;
-            margin: 20px;
+            margin: 10px;
 
-            @media (min-width: 768px) {
+            &:first-child {
+                margin-top: 20px;
+            }
+
+            &:last-child {
+                margin-bottom: 20px;
+            }
+
+            @media (min-width: 321px) {
                 border: none;
                 margin: 20px;
+                width: 200px;
             }
 
             .image-wrapper {
-                //width: 100%;
                 margin: 0 -10px 10px -10px;
                 height: 130px;
+                background: $mediumgray;
                 overflow: hidden;
                 position: relative;
 
@@ -65,8 +77,6 @@
                 margin-right: -10px;
                 &:before {
                     content: "";
-                    // use the linear-gradient for the fading effect
-                    // use a solid background color for a solid bar
                     background: #c8c5af;
                     position: absolute;
                     left: 0;
@@ -94,42 +104,77 @@
             display: flex;
             width: 100%;
             justify-content: center;
-            
+            margin: auto;
+
             .pages-counter {
-                margin: 0 20px;
+                margin: auto 20px;
             }
+        }
+
+        .alert-info {
+            height: 45px;
+            margin: auto;
         }
     }
 
     .events-filter {
-        background-color: #f1f1f1;
-        padding: 10px 20px;
+        padding: 0 20px;
         flex-basis: auto;
+        background-color: $mediumgray;
 
-        @media (min-width: 768px) {
-            max-height: 500px;
-            max-width: 300px;
+        @media (min-width: 992px) {
+            background-color: $mediumgray;
+            max-height: 440px;
+            max-width: 270px;
+            margin-top: 50px;
+        }
+
+        hr {
+            margin: 10px 0;
+
+            @media (min-width: 992px) {
+                margin: 1rem 0;
+            }
+        }
+
+        .filter-header {
+
+            @media (min-width: 992px) {
+                height: 20px;
+            }
         }
 
         .btn-filter {
-            float: right;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 9;
 
-
-            @media (min-width: 768px) {
+            @media (min-width: 992px) {
                 display: none;
             }
         }
-        .event-categories-form {
-            padding-top: 40px;
 
-            @media (min-width: 768px) {
+        .event-filter-form {
+            margin: 20px 0;
+
+            @media (min-width: 992px) {
                 display: block;
             }
 
             .search-container {
-                margin-bottom: 20px;
-                width: 90%;
-                
+                max-width: 220px;
+
+                @media (min-width: 992px) {
+                    width: 100%;
+                }
+
+                .search-input-field {
+                    box-shadow: none;
+                    border-color: $bordergray;
+                    border-right: none;
+                }
+
                 .fa-search {
                     color: $green;
                 }
@@ -139,18 +184,95 @@
                     border: 1px solid #ced4da;
                     border-left: none;
                     box-shadow: none;
+                }
+            }
 
-                    /* &:active {
-                        box-shadow: none;
-                    } */
+            .checkboxes-wrapper {
+                display: flex;
+                flex-wrap: wrap;
+
+                @media (min-width: 992px) {
+                    flex-direction: column;
+                }
+
+                .checkbox-container {
+                    display: flex;
+                    margin: 5px;
+                    padding: 5px;
+                    border: 1px solid $bordergray;
+                    border-radius: 8px;
+                    align-items: center;
+
+                    @media (min-width: 992px) {
+                        padding: 0;
+                        border: none;
+                    }
+
+                    input[type="checkbox"] {
+                        position: relative;
+                        width: 1.5em;
+                        height: 1.5em;
+                        color: $black;
+                        background-color: $white;
+                        border: 1px solid $gray;
+                        border-radius: 4px;
+                        appearance: none;
+                        outline: 0;
+                        cursor: pointer;
+                        transition: background 175ms cubic-bezier(0.1, 0.1, 0.25, 1);
+                        &::before {
+                            position: absolute;
+                            content: "";
+                            display: block;
+                            top: 1px;
+                            left: 6px;
+                            width: 8px;
+                            height: 14px;
+                            border-style: solid;
+                            border-color: $white;
+                            border-width: 0 3px 3px 0;
+                            transform: rotate(45deg);
+                            opacity: 0;
+                        }
+                        &:checked {
+                            color: $white;
+                            border-color: $green;
+                            background: $green;
+                            &::before {
+                                opacity: 1;
+                            }
+                            ~ label::before {
+                                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                            }
+                        }
+                    }
+
+                    label {
+                        position: relative;
+                        padding: 0 0 0 5px;
+                        margin: 0;
+
+                        user-select: none;
+
+                        @media (min-width: 992px) {
+                            padding: 0 0.8em 0;
+                        }
+                    }
                 }
             }
 
             .date-container {
-                width: 90%;
+                max-width: 280px;
+
+                @media (min-width: 992px) {
+                    width: 100%;
+                }
 
                 .daterange {
                     border-right: none;
+                    box-shadow: none;
+                    border-color: $bordergray;
+                    padding-right: 0;
                 }
 
                 .fa-calendar-alt {
@@ -161,61 +283,45 @@
                     background-color: #fff;
                     border: 1px solid #ced4da;
                     border-left: none;
+                    box-shadow: none;
                 }
             }
+        }
+    }
+}
 
-            .checkbox-container {
-                display: flex;
-                margin-bottom: 10px;
+.daterangepicker {
 
-                input[type="checkbox"] {
-                    position: relative;
-                    width: 1.5em;
-                    height: 1.5em;
-                    color: $black;
-                    background-color: $white;
-                    border: 1px solid $gray;
-                    border-radius: 4px;
-                    appearance: none;
-                    outline: 0;
-                    cursor: pointer;
-                    transition: background 175ms cubic-bezier(0.1, 0.1, 0.25, 1);
-                    &::before {
-                        position: absolute;
-                        content: "";
-                        display: block;
-                        top: 1px;
-                        left: 6px;
-                        width: 8px;
-                        height: 14px;
-                        border-style: solid;
-                        border-color: $white;
-                        border-width: 0 3px 3px 0;
-                        transform: rotate(45deg);
-                        opacity: 0;
-                    }
-                    &:checked {
-                        color: $white;
-                        border-color: $green;
-                        background: $green;
-                        &::before {
-                            opacity: 1;
-                        }
-                        ~ label::before {
-                            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-                        }
-                    }
-                }
+    .applyBtn {
+        color: $white;
+        border-color: $teal;
+        background-color: $teal;
 
-                label {
-                    position: relative;
-                    cursor: pointer;
-                    /* font-size: 1.5em;
-                    font-weight: 600; */
-                    padding: 0 0.8em 0;
-                    user-select: none;
-                }
-            }
+        &:hover {
+            color: $teal;
+            background-color: $white;
+        }
+    }
+
+    .cancelBtn {
+        color: $red;
+        border-color: $red;
+
+        &:hover {
+            color: $white;
+            background-color: $red;
+        }
+    }
+
+    td.active {
+        background-color: $teal;
+    }
+
+    .drp-selected {
+        padding-right: 0;
+
+        @media (min-width: 768px) {
+            padding-right: 10px;
         }
     }
 }

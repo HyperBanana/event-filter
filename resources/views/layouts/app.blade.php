@@ -6,15 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
+    @yield('scripts')
 </head>
 
 <body>
     @include('inc.navbar')
     <div class="container">
-        @include('inc.messages')
         @yield('content')
     </div>
-    @yield('scripts')
 </body>
 
 </html>

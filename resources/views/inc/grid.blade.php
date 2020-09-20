@@ -1,4 +1,5 @@
-    @if (count($events) > 0)
+
+   @if (count($events) > 0)
         @foreach ($events as $event)
             <div class="well event-card">
                 <small>{{ $event->datetime }}</small>
@@ -9,11 +10,12 @@
                 <h3>{{ $event->title }}</h3>
             </div>
         @endforeach
+        <div class="pagination-wrapper">
+            {{ $events->links('inc.pagination') }}
+        </div>
     @else
-        <div>
-            <p>Nav notikumu</p>
+        <div class="alert alert-info">
+            Nav notikumu
         </div>
     @endif
-    <div class="pagination-wrapper">
-        {{ $events->links('inc.pagination') }}
-    </div>
+

@@ -16,4 +16,4 @@ use App\Http\Controllers\EventsController;
 */
 
 Route::get('/', [EventsController::class, 'index']);
-Route::get('eventFilter', [EventsController::class, 'eventFilter']);
+//Route::get('eventFilter', [EventsController::class, 'eventFilter']);

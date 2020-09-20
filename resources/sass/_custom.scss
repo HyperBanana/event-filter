@@ -1,12 +1,14 @@
 @import "variables";
-@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
-@import '~@fortawesome/fontawesome-free/scss/solid';
- 
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+
 .events-wrapper {
-    
+    margin-bottom: 40px;
     @media (min-width: 768px) {
         margin-top: 20px;
     }
+
+    
     .events-grid {
         display: flex;
         flex-wrap: wrap;
@@ -15,10 +17,16 @@
         .event-card {
             width: 200px;
             padding: 10px;
-            margin: 20px;
             text-align: left;
             align-items: center;
             overflow: hidden;
+            //border-bottom: 1px solid $green;
+            margin: 20px;
+
+            @media (min-width: 768px) {
+                border: none;
+                margin: 20px;
+            }
 
             .image-wrapper {
                 //width: 100%;
@@ -81,18 +89,31 @@
                 font-size: 12pt;
             }
         }
+
+        .pagination-wrapper {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            
+            .pages-counter {
+                margin: 0 20px;
+            }
+        }
     }
 
     .events-filter {
         background-color: #f1f1f1;
-        padding: 20px;
+        padding: 10px 20px;
+        flex-basis: auto;
 
         @media (min-width: 768px) {
-            max-height: 470px;
+            max-height: 500px;
+            max-width: 300px;
         }
 
         .btn-filter {
             float: right;
+
 
             @media (min-width: 768px) {
                 display: none;
@@ -105,16 +126,32 @@
                 display: block;
             }
 
-            .date-input {
+            .search-container {
+                margin-bottom: 20px;
+                width: 90%;
+                
+                .fa-search {
+                    color: $green;
+                }
+
+                .btn-outline-secondary {
+                    background-color: #fff;
+                    border: 1px solid #ced4da;
+                    border-left: none;
+                    box-shadow: none;
+
+                    /* &:active {
+                        box-shadow: none;
+                    } */
+                }
+            }
+
+            .date-container {
                 width: 90%;
 
                 .daterange {
-                    /* margin-top: 10px;
-                    border: 1px solid $gray;
-                    border-radius: 4px;
-                    padding: 5px 15px; */
                     border-right: none;
-                } 
+                }
 
                 .fa-calendar-alt {
                     color: $green;
@@ -125,7 +162,6 @@
                     border: 1px solid #ced4da;
                     border-left: none;
                 }
-
             }
 
             .checkbox-container {

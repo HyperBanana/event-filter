@@ -7,11 +7,19 @@
             @include('inc.grid')
         </div>
         
-        <div class="events-filter col col-lg-3 col-md-6 order-1 order-md-2">
-            <button class="btn-filter btn btn-light " data-toggle="collapse" data-target=".event-categories-form">Filtrs</button>
+        <div class="events-filter col col-lg-4 col-md-6 order-1 order-md-2">
+            <button class="btn-filter btn btn-success " data-toggle="collapse" data-target=".event-categories-form">Filtrs</button>
             {!! Form::open(['method' => 'GET', 'class' => 'event-categories-form collapse']) !!}
+            <div class="input-group search-container">
+                {{ Form::text('search-input-field', '', ['class' => 'search-input-field form-control', 'placeholder' => 'Meklēt notikumus']) }}
+                <span class="input-group-append">
+                    <button type="button" class="btn-search btn btn-outline-secondary" action="submit" form="event-categories-form">
+                        <span class="fas fa-search"></span>
+                    </button>
+            </div>
+            <hr>
             <div class="checkbox-container">
-                {{ Form::checkbox('all', 'all', true) }}
+                {{ Form::checkbox('all', '', true) }}
                 {{ Form::label('all', 'Visas tēmas') }}
             </div>
             <div class="checkbox-container">
@@ -39,7 +47,7 @@
                 {{ Form::label('cits', 'Cita tēma') }}
             </div>
             <hr>
-            <div class="input-group date-input">
+            <div class="input-group date-container">
                 {{ Form::text('date', '', ['class' => 'daterange form-control', 'placeholder' => 'Atlasīt laika periodu']) }}
 
                 <span class="input-group-append">

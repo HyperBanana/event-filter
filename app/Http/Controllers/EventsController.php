@@ -3,51 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Response;
 use App\Models\Event;
-use Storage;
-use Carbon\Carbon;
-use DB;
 
 class EventsController extends Controller
 {
 
     public function index(Request $request)
     {
+        /* if ($request->ajax()) {
+            //echo("ajax");
+            $events = $this->eventFilter();
+
+            return view('inc.grid')->with('events', $events);
+            //dd(view('inc.grid')->with('events', $events));
+        } else {
+            $events = Event::orderBy('datetime', 'asc')->paginate(6);
+            //dd($events);
+            return view('pages.index')->with('events', $events);
+        } */
+
+            $events = $this->eventFilter();
         if ($request->ajax()) {
-            $events = Event::when(request()->has('dateRange'), function($q) {
-                $q->whereBetween('datetime', [request('dateRange.start'), request('dateRange.end')]);
-            })->orderBy('datetime', 'asc')->paginate(6);
-            $events = $this->convertEventsDate($events);
-
-            return view('inc.grid')->with('events', $events)->render();
+            return view('inc.grid')->with('events', $events);
+        } else {
+            return view('pages.index')->with('events', $events);
         }
-
-        $events = Event::orderBy('datetime', 'asc')->paginate(6);
-        $events = $this->convertEventsDate($events);
-
-        return view('pages.index')->with('events', $events);
     }
 
-    public function eventFilter(Request $request)
+    public function eventFilter()
     {
-        if ($request->ajax()) {
-            $events = Event::when(request()->has('categories'), function($q) {
-                $q->whereIn('type', request('categories'));
+        $events = Event::when(request('categories'), function ($q, $categories) {
+            $q->whereIn('type', $categories);
             })
-            ->when(request()->has('dateRange'), function($q) {
-                $q->whereBetween('datetime', [request('dateRange.start'), request('dateRange.end')]);
+            ->when(request('dateRange'), function ($q, $dateRange) {
+                $q->whereBetween('datetime', $dateRange);
+            })
+            ->when(request('searchTerms'), function ($q, $terms) {
+                foreach ($terms as $term) {
+                    $q->where('title', 'LIKE', '%' . $term . '%');
+                }
             })->orderBy('datetime', 'asc')->paginate(6);
-            $events = $this->convertEventsDate($events);
-        }
-        return view('inc.grid')->with('events', $events);
-    }
-
-    public function convertEventsDate($events)
-    {
-        foreach ($events as $event) {
-            $event->datetime = Carbon::parse($event->datetime)->locale('lv')->translatedFormat('d. F');
-        }
 
         return $events;
     }

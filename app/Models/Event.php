@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Storage;
+use Carbon\Carbon;
 
 class Event extends Model
 {
     use HasFactory;
 
-    // Table name
     protected $table = 'events';
 
     protected $fillable = [
@@ -23,11 +22,9 @@ class Event extends Model
     ];
 
     public $timestamps = false;
-    
-/*     public static function all($columns = ['*'])
+
+    public function getDatetimeAttribute($value)
     {
-        $json = Storage::disk('local')->get('mock_events.json');
-        $events = json_decode($json);
-        return $events;
-    } */
+        return Carbon::parse($value)->locale('lv')->translatedFormat('d. F');
+    }
 }

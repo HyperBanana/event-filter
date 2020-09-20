@@ -10,8 +10,10 @@
             </div>
         @endforeach
     @else
-        <p>Nav notikumu</p>
+        <div>
+            <p>Nav notikumu</p>
+        </div>
     @endif
-    <div>
-        {{ $events->links() }}
+    <div class="pagination-wrapper">
+        {{ $events->links('inc.pagination') }}
     </div>
